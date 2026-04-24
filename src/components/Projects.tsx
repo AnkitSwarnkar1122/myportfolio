@@ -145,7 +145,7 @@ const Projects: React.FC = () => {
               Want to see more of my work or collaborate on a project?
             </p>
             <a
-              href="https://github.com/ankitswarnkar"
+              href="https://github.com/AnkitSwarnkar1122"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-indigo-400/25 transition-all duration-300 transform hover:scale-105"

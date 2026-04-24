@@ -37,12 +37,8 @@ const Hero: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          Teacher at <span className="font-semibold">Saan Coaching Center</span>{" "}
-          | Expert in{" "}
-          <span className="font-semibold">
-            English Speaking, Writing, Listening & Reading
-          </span>{" "}
-          | Helping students improve communication skills with confidence.
+          Computer Science graduate focused on <span className="font-semibold text-indigo-600 dark:text-indigo-400">Artificial Intelligence</span>.
+          Experienced in building intelligent, data-driven solutions for real-world challenges.
         </motion.p>
 
         {/* Buttons */}

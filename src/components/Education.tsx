@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { GraduationCap, MapPin, Calendar, BookOpen, Award, Globe, Users } from 'lucide-react';
-import { education, achievements } from '../data/portfolio';
+import { GraduationCap, MapPin, Calendar, BookOpen, ExternalLink, Globe } from 'lucide-react';
+import { educationList, ieltsScore } from '../data/portfolio';
 
 const Education: React.FC = () => {
   const [ref, inView] = useInView({
@@ -11,7 +11,7 @@ const Education: React.FC = () => {
   });
 
   return (
-    <section className="py-20 bg-white">
+    <section id="education" className="py-20 bg-gray-50">
       <div className="container mx-auto px-6">
         <motion.div
           ref={ref}
@@ -22,152 +22,124 @@ const Education: React.FC = () => {
         >
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Education & <span className="text-indigo-600">Achievements</span>
+              Education & <span className="text-indigo-600">Qualifications</span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-indigo-600 to-yellow-400 mx-auto mb-8"></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              My academic journey and professional achievements that have shaped my 
-              expertise in technology and education.
-            </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 mb-16">
-            {/* Education Section */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-8 h-full">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 bg-indigo-100 rounded-lg">
-                    <GraduationCap className="text-indigo-600" size={28} />
+            <div className="space-y-8">
+              {educationList.map((edu, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="p-3 bg-indigo-100 rounded-xl text-indigo-600">
+                      <GraduationCap size={24} />
+                    </div>
+                    {edu.website && (
+                      <a href={edu.website} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-indigo-600">
+                        <ExternalLink size={20} />
+                      </a>
+                    )}
                   </div>
-                  <h3 className="text-2xl font-bold text-gray-900">Current Education</h3>
-                </div>
-                
-                <div className="space-y-4">
-                  <div className="border-l-4 border-indigo-500 pl-6">
-                    <h4 className="text-xl font-bold text-gray-900 mb-2">{education.degree}</h4>
-                    <div className="flex items-center gap-2 text-indigo-600 mb-2">
-                      <BookOpen size={16} />
-                      <span className="font-medium">{education.institution}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-gray-600 mb-2">
-                      <MapPin size={16} />
-                      <span>{education.location}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-gray-600 mb-3">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{edu.degree}</h3>
+                  <div className="text-indigo-600 font-semibold mb-4">{edu.institution}</div>
+                  
+                  <div className="grid grid-cols-2 gap-4 mb-6 text-sm text-gray-500">
+                    <div className="flex items-center gap-2">
                       <Calendar size={16} />
-                      <span>{education.period}</span>
+                      {edu.period}
                     </div>
-                    <span className="inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
-                      {education.status}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <MapPin size={16} />
+                      {edu.location}
+                    </div>
                   </div>
-                </div>
 
-                <div className="mt-8 bg-white rounded-lg p-6 shadow-sm">
-                  <h5 className="font-semibold text-gray-900 mb-3">Academic Focus</h5>
-                  <div className="flex flex-wrap gap-2">
-                    {['Computer Science', 'Software Engineering', 'Web Development', 'Data Structures'].map((subject, index) => (
-                      <span
-                        key={index}
-                        className="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-sm"
-                      >
-                        {subject}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+                  {edu.grade && (
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-green-50 text-green-700 rounded-full text-sm font-bold mb-4">
+                      Final Grade: {edu.grade}
+                    </div>
+                  )}
 
-            {/* Achievements Section */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-8 h-full">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 bg-yellow-100 rounded-lg">
-                    <Award className="text-yellow-600" size={28} />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900">Key Achievements</h3>
-                </div>
-                
-                <div className="space-y-6">
-                  {achievements.map((achievement, index) => {
-                    const IconComponent = achievement.icon === 'Award' ? Award : 
-                                        achievement.icon === 'Users' ? Users :
-                                        GraduationCap;
-                    
-                    return (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={inView ? { opacity: 1, y: 0 } : {}}
-                        transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-                        className="bg-white rounded-lg p-4 shadow-sm"
-                      >
-                        <div className="flex items-start gap-4">
-                          <div className="p-2 bg-yellow-100 rounded-lg shrink-0">
-                            <IconComponent className="text-yellow-600" size={20} />
-                          </div>
-                          <div>
-                            <h5 className="font-semibold text-gray-900 mb-1">{achievement.title}</h5>
-                            <p className="text-gray-600 text-sm mb-2">{achievement.description}</p>
-                            <span className="text-xs text-gray-500 font-medium">{achievement.date}</span>
-                          </div>
-                        </div>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* IELTS Highlight */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-8 text-white text-center"
-          >
-            <div className="max-w-3xl mx-auto">
-              <div className="flex justify-center mb-6">
-                <div className="p-4 bg-white/20 rounded-full">
-                  <Globe size={48} />
-                </div>
-              </div>
-              <h3 className="text-3xl font-bold mb-4">IELTS Band 7.5</h3>
-              <p className="text-lg opacity-90 leading-relaxed mb-6">
-                Achieved excellent English proficiency, enabling me to communicate effectively 
-                with international clients, teach in English, and contribute to global 
-                development communities.
-              </p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
-                <div className="bg-white/10 rounded-lg p-3">
-                  <div className="text-2xl font-bold">7.5</div>
-                  <div className="text-sm opacity-75">Overall</div>
-                </div>
-                <div className="bg-white/10 rounded-lg p-3">
-                  <div className="text-2xl font-bold">8.0</div>
-                  <div className="text-sm opacity-75">Listening</div>
-                </div>
-                <div className="bg-white/10 rounded-lg p-3">
-                  <div className="text-2xl font-bold">7.5</div>
-                  <div className="text-sm opacity-75">Reading</div>
-                </div>
-                <div className="bg-white/10 rounded-lg p-3">
-                  <div className="text-2xl font-bold">7.0</div>
-                  <div className="text-sm opacity-75">Writing</div>
-                </div>
-              </div>
+                  {edu.details && (
+                    <ul className="space-y-2 mt-4">
+                      {edu.details.map((detail, i) => (
+                        <li key={i} className="text-sm text-gray-600 flex items-start gap-2">
+                          <span className="mt-1.5 w-1 h-1 bg-indigo-300 rounded-full shrink-0"></span>
+                          {detail}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </motion.div>
+              ))}
             </div>
-          </motion.div>
+
+            <div className="space-y-8">
+              {/* IELTS Section */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-2xl p-8 text-white shadow-xl"
+              >
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="p-3 bg-white/20 rounded-xl">
+                    <Globe size={32} />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold">IELTS Academic</h3>
+                    <p className="text-indigo-100 opacity-80">Overall Band Score: {ieltsScore.overall}</p>
+                  </div>
+                </div>
+
+                <p className="text-indigo-50 mb-8 leading-relaxed">
+                  Demonstrates strong listening and reading proficiency with competent communication skills, essential for international collaboration and advanced studies.
+                </p>
+
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    { label: 'Listening', score: ieltsScore.listening },
+                    { label: 'Reading', score: ieltsScore.reading },
+                    { label: 'Writing', score: ieltsScore.writing },
+                    { label: 'Speaking', score: ieltsScore.speaking }
+                  ].map((item, i) => (
+                    <div key={i} className="bg-white/10 rounded-xl p-4 border border-white/10">
+                      <div className="text-2xl font-bold mb-1">{item.score}</div>
+                      <div className="text-xs uppercase tracking-wider opacity-70">{item.label}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-8 pt-8 border-t border-white/10 flex items-center justify-between">
+                  <div className="text-sm opacity-80">Test Date: {ieltsScore.date}</div>
+                  <div className="px-3 py-1 bg-white/20 rounded-full text-xs font-bold uppercase">Result: Verified</div>
+                </div>
+              </motion.div>
+
+              {/* Research/AI Focus Note */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="bg-white rounded-2xl p-8 shadow-md border border-gray-100"
+              >
+                <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <BookOpen className="text-indigo-600" size={24} />
+                  Future Objectives
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  Aiming to pursue a Master’s in AI to build intelligent, data-driven solutions for real-world challenges. Currently deepening knowledge in Machine Learning, NLP, and Computer Vision through practical internships and personal research.
+                </p>
+              </motion.div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
