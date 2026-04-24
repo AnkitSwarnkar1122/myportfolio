@@ -41,6 +41,7 @@ const About: React.FC = () => {
       description: 'Janakpur-14, exploring AI solutions'
     }
   ];
+  // hello 
 
   return (
     <section id="about" className="py-20 bg-white">
